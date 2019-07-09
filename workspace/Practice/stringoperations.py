@@ -1,0 +1,12 @@
+myStr="Hello World!!!"
+print("Length of myStr is %d " %len(myStr))
+print(myStr.index("o"))
+print(myStr.count("!"))
+print(myStr[3:7])
+print(myStr[0:10:2])
+print(myStr.upper())
+print(myStr.lower())
+print(myStr.startswith("Hello"))
+print(myStr.endswith("asdfasdfasdf"))
+afewwords = myStr.split(" ")
+print(afewwords)

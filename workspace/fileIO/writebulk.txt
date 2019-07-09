@@ -1,0 +1,139 @@
+## List Docker CLI commands
+docker
+docker container --help
+
+## Display Docker version and info
+docker --version
+docker version
+docker info
+
+## Execute Docker image
+docker run hello-world
+
+## List Docker images
+docker image ls
+
+## List Docker containers (running, all, all in quiet mode)
+docker container ls
+docker container ls --all
+docker container ls -aq
+
+
+## Remove unused images
+docker rmi $(docker images -q -f dangling=true)
+
+
+## To go inside a docker container:
+docker exec -it <container> bash
+
+## To copy file from docker container:
+docker cp <container id>:<path on docker container> <path to be copied>
+
+## To copy file into docker container:
+docker cp <file> <container>:<destination>
+
+## To restart container:
+docker restart <container>
+
+## Go into maria db
+docker exec -it <container> mysql -uroot -proot
+
+
+docker logs --tail 500 service-portal-staging
+
+
+docker build -t sp_staging_tomcat .
+
+docker run -v /home/ucm/Koushik/Docker_tomcat9/Docker/tomcat/config/ -v /etc/localtime:/etc/localtime:ro -d --name "sp-staging" --restart always -p 8443:8443 sp_staging_tomcat
+
+
+
+docker run --name "test_container" -d --restart always -p 8443:8080 tomcat8/jre8
+
+
+docker run --name mariadb --restart always -p 3306:3306 -v /var/mariadb-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=root -d ca06ca3d8fad
+
+---------------------------
+----------------------------
+
+
+$JAVA_HOME/bin/keytool -genkey -alias tomcat -keyalg RSA -keystore UCMCERT
+
+docker build -t tomcat .
+docker run -d --name "pharmacy-locator" --restart always -p 8443:8443 tomcat
+
+
+docker-compose build
+docker-compose up -d
+
+---------------
+
+docker pull mariadb:latest
+
+docker run --name pharmacylocator-mariadb --restart always -p 3306:3306 -v /home/volumes/mariadb-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=password -d mariadb
+
+
+
+chcon -Rt svirt_sandbox_file_t /home/volumes/mariadb-data/
+
+https://store.docker.com/images/mariadb
+
+
+ sudo chown -R 1000:1000 /home/volumes/jenkins-data/
+
+
+Docker : 1.13.1
+
+Docker jdk image : openjdk version "1.8.0_162"
+
+Docker Tomcat image : 8.5.30
+
+Docker Maria db image: 10.2.14-MariaDB-10.2.14+maria~jessie
+
+
+
+-------------------------------------------
+
+To install docker : https://docs.docker.com/install/linux/docker-ce/centos/
+
+To install docker Compose :
+
+sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+
+
+Pull the code from  https://github.com/ucm-engineering/pharmacy_locator/tree/develop/docker
+ 
+Steps to build and run : 
+
+docker-compose build
+
+docker-compose up -d
+
+
+docker run \
+  --rm \
+  -u root \
+  -d \
+  -p 8888:8087 \
+  -v /home/volumes/jenkins-data:/var/jenkins_home \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  -v "$HOME":/home \
+  -e JENKINS_OPTS="--httpPort=8087" \
+  jenkinsci/blueocean
+  
+  
+  localhost:8888
+  fsuser
+  Focus123
+  -------------
+  
+  docker run -u root -d -p 8888:8087 -v /home/volumes/jenkins-data:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v "$HOME":/home -e JENKINS_OPTS="--httpPort=8087" jenkinsci/blueocean
+
+
+  docker run -u root -d -p 8888:8087 -v /home/volumes/jenkins-data:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock -v /root:/home -e JENKINS_OPTS="--httpPort=8087" jenkinsci/blueocean
+
+  
+  Permission issue
+  -------------------
+  chcon -Rt svirt_sandbox_file_t <directory>
+  chmod 777 <directory>
